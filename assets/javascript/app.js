@@ -2,7 +2,7 @@ window.onload = function(){
     var clockRunning = false;
     var score=0;
     var timer=60;
-    $("#timer").text = timer;
+    $("#timer").text = 60;
 
 
 const questions = [
@@ -28,8 +28,11 @@ for(let i = 0; i < questions.length; i++){
     const $answerDiv = $('<div>');
     for(let i = 0; i < currentQuestion.answers.length; i++){
         const currentAnswer = currentQuestion.answers[i];
-        const $answerP = $('<button>').text(currentAnswer);
-        $answerDiv.append($answerP);
+        const $answerP = $('<h2>').text(currentAnswer);
+        const $radio= $(`<input type='radio' name= ${(quiz(questions[i]))}>`)
+        $answerDiv.append($answerP)
+        $answerP.addClass($([i]))
+        $answerP.prepend($radio)
         $answerDiv.append($("<p>"))
         if(i==4){($answerP).addClass("right")}
         else{($answerP).addClass("wrong")}
@@ -53,18 +56,27 @@ function start(){
     if (!clockRunning){
         intervalId= setInterval(tick, 1000);
         clockRunning=true;
-        console.log("start")
-
     
     }
 }
 
 function tick(){
     timer--
-    $("#timer").text = timer;
+    $("#timer").text(timer);
+    if(timer<1){ 
+        gameOver()
+    }
 }
 
+function gameOver(){
+    clockRunning=false;
+    clearInterval(intervalId)
 
+    alert("This is where I'd give you a score if this was a real quiz. Alas, I decided to go with comedy instead of trivia. \n /shrug")
+
+
+
+}
 
 function quiz(arr){
     console.log("quiz")
