@@ -21,25 +21,27 @@ for(let i = 0; i < questions.length; i++){
     const $questionDiv = $('<div>');
     const $questionP = $('<h1>');
     const question = currentQuestion.question;
-
+    
     $questionP.text(question)
     $questionDiv.append($questionP)
-
+    $questionDiv.addClass("card")
+    
     const $answerDiv = $('<div>');
-    for(let i = 0; i < currentQuestion.answers.length; i++){
-        const currentAnswer = currentQuestion.answers[i];
+    for(let j = 0; j < currentQuestion.answers.length; j++){
+        const currentAnswer = currentQuestion.answers[j];
         const $answerP = $('<h2>').text(currentAnswer);
-        const $radio= $(`<input type='radio' name= ${(quiz(questions[i]))}>`)
+        const $radio= $(`<input type='radio' name= ${i}>`)
         $answerDiv.append($answerP)
-        $answerP.addClass($([i]))
         $answerP.prepend($radio)
         $answerDiv.append($("<p>"))
-        if(i==4){($answerP).addClass("right")}
+        if(j==4){($answerP).addClass("right")}
         else{($answerP).addClass("wrong")}
+        $answerDiv.addClass("card")
     }
     $answerDiv.hide();
     $questionDiv.hide();
     $('.questions').append($questionDiv, $answerDiv)
+    
 
 $("#startTimer").on('click', (event)=> {
     event.preventDefault();
